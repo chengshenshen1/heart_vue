@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>router</title>
+    <style>
+        h1{
+            text-align: center;
+        }
+        .box{
+            display: flex;
+            width: 100%;
+            flex-wrap: wrap;
+            border-bottom: 1px solid #e6b422;
+        }
+        .box a{
+            width: 33.3%;
+            box-sizing: border-box;
+            text-align: center;
+            height: 100px;
+            line-height: 100px;
+            font-size: 50px;
+            text-decoration: none;
+            color: #888e7e;
+        }
+         .box .router-link-active{
+            color: #bf242a;
+            border: 1px solid #bf242a
+        }
+        .container{
+            display: flex;
+            flex-wrap: nowrap;
+            width: 100%;
+            font-size: 50px;
+        }
+        .container .show{
+            width: 66.7%;
+            box-sizing: border-box;
+            border-right: 1px solid #e6b422;
+        }
+        .container .picked{
+            width: 33.3%;
+        }
+
+    </style>
+</head>
+<body>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+
+<div id="app">
+    <h1>炉石传说组卡器</h1>
+    <div class="box">
+        <router-link to="/druid">德鲁伊</router-link>
+        <router-link to="/hunter">猎人</router-link>
+        <router-link to="/mega">法师</router-link>
+        <router-link to="/paladin">圣骑士</router-link>
+        <router-link to="/preist">牧师</router-link>
+        <router-link to="/rogue">盗贼</router-link>
+        <router-link to="/shaman">萨满</router-link>
+        <router-link to="/warrior">战士</router-link>
+        <router-link to="/walock">术士</router-link>
+    </div>
+    <div class="container">
+        <div class="show">
+            <router-view></router-view>
+        </div>
+        <div class="picked">
+            选中卡组
+        </div>
+    </div>
+</div>
+<script>
+    const Druid = {
+        data(){
+            return{
+                msg:'我是Druid组件'
+            }
+        },
+        methods :{
+            get:function(){
+                this.$http.get('cards.json').then(function(res){
+                        alert(1);
+                    },function(res) {
+                    alert(res.data);
+                    })
+            }
+        },
+        template: '<div>{{msg}}</div>'
+    }
+
+    const Hunter = {
+        data(){
+            return{
+                msg:'我是Hunter组件'
+            }
+        },
+        template: '<div>{{msg}}</div>'
+    }
+
+    const Mega = {
+        data(){
+            return{
+                msg:'我是Mega组件'
+            }
+        },
+        template: '<div>{{msg}}</div>'
+    }
+
+    const Paladin = {
+        data(){
+            return{
+                msg:'我是Paladin组件'
+            }
+        },
+        template: '<div>{{msg}}</div>'
+    }
+
+    const Preist = {
+        data(){
+            return{
+                msg:'我是Preist组件'
+            }
+        },
+        template: '<div>{{msg}}</div>'
+    }
+
+    const Rogue = {
+        data(){
+            return{
+                msg:'我是Rogue组件'
+            }
+        },
+        template: '<div>{{msg}}</div>'
+    }
+
+    const Shaman = {
+        data(){
+            return{
+                msg:'我是Shaman组件'
+            }
+        },
+        template: '<div>{{msg}}</div>'
+    }
+
+    const Warrior = {
+        data(){
+            return{
+                msg:'我是Warrior组件'
+            }
+        },
+        template: '<div>{{msg}}</div>'
+    }
+
+    const Walock = {
+        data(){
+            return{
+                msg:'我是Walock组件'
+            }
+        },
+        template: '<div>{{msg}}</div>'
+    }
+    // 2. 定义路由
+    // 每个路由应该映射一个组件。 其中"component" 可以是
+    // 通过 Vue.extend() 创建的组件构造器，
+    // 或者，只是一个组件配置对象。
+    // 我们晚点再讨论嵌套路由。
+    const routes = [
+        { path: '/druid', component: Druid },
+        { path: '/hunter', component: Hunter },
+        { path: '/mega', component: Mega },
+        { path: '/paladin', component: Paladin },
+        { path: '/preist', component: Preist },
+        { path: '/rogue', component: Rogue },
+        { path: '/shaman', component: Shaman },
+        { path: '/warrior', component: Warrior },
+        { path: '/walock', component: Walock },
+    ]
+
+    // 3. 创建 router 实例，然后传 `routes` 配置
+    // 你还可以传别的配置参数, 不过先这么简单着吧。
+    const router = new VueRouter({
+        routes // （缩写）相当于 routes: routes
+    })
+
+    // 4. 创建和挂载根实例。
+    // 记得要通过 router 配置参数注入路由，
+    // 从而让整个应用都有路由功能
+    const app = new Vue({
+        router
+    }).$mount('#app')
+
+    // 现在，应用已经启动了！
+
+</script>
+</body>
+</html>
